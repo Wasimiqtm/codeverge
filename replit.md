@@ -24,7 +24,8 @@ Preferred communication style: Simple, everyday language.
 - **Runtime**: Node.js with Express.js server
 - **Language**: TypeScript with ES modules
 - **Data Validation**: Zod schemas for type-safe validation
-- **Storage**: In-memory storage with interface for future database integration
+- **Database**: PostgreSQL with Drizzle ORM for data persistence
+- **Storage**: DatabaseStorage class implementing IStorage interface
 - **Session Management**: express-session with connect-pg-simple (configured for PostgreSQL)
 
 ### Key Components
@@ -93,10 +94,11 @@ Preferred communication style: Simple, everyday language.
 - **Environment**: Production mode serves static files and API from single Express server
 
 ### Configuration Notes
-- Database connection requires `DATABASE_URL` environment variable
-- Application uses PostgreSQL dialect in Drizzle configuration
-- Session storage configured for PostgreSQL but falls back to memory store
-- The current implementation uses in-memory storage for development, but the architecture supports easy migration to PostgreSQL database
+- Database connection established using `DATABASE_URL` environment variable
+- Application uses PostgreSQL with Drizzle ORM for data persistence
+- Session storage configured for PostgreSQL
+- All contact form submissions and user data are now stored in the PostgreSQL database
+- Database schema automatically synced using `npm run db:push` command
 
 ### Replit Integration
 - Configured with Replit-specific Vite plugins for development experience
