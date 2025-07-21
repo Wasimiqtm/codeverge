@@ -26,8 +26,9 @@ export default function Header() {
   return (
     <motion.header
       className={`fixed w-full top-0 z-50 transition-all duration-300 ${
-        isScrolled ? "glass-effect border-b border-white/10" : "bg-black/90 backdrop-blur-md"
+        isScrolled ? "glass-effect border-b border-white/10" : "backdrop-blur-md"
       }`}
+      style={!isScrolled ? { background: '#071518' } : {}}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
@@ -39,8 +40,12 @@ export default function Header() {
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
-            <div className="w-10 h-10 gradient-bg-blue rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">CV</span>
+            <div className="w-12 h-12 rounded-lg flex items-center justify-center overflow-hidden">
+              <img 
+                src="/attached_assets/codeverge.png" 
+                alt="CodeVerge Logo" 
+                className="w-full h-full object-cover"
+              />
             </div>
             <span className="text-xl font-bold gradient-text">CodeVerge</span>
           </motion.div>

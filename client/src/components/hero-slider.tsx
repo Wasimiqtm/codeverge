@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, Eye, ArrowLeft, ArrowRight as ArrowRightIcon } from "lucide-react";
 
 const slides = [
   {
@@ -27,8 +28,27 @@ export default function HeroSlider() {
     return () => clearInterval(timer);
   }, []);
 
+  const goToPrev = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  const goToNext = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
+
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Left Arrow Button */}
+      <button
+        onClick={goToPrev}
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-[#10151A] border border-[#2EB1CB] text-[#2EB1CB] p-3 rounded-full shadow-md hover:bg-[#18222C] hover:text-white transition-all duration-300"
+        aria-label="Previous Slide"
+      >
+        <ArrowLeft className="w-6 h-6" />
+      </button>
+      {/* Right Arrow Button */}
+      <button
+        onClick={goToNext}
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-[#10151A] border border-[#5682C2] text-[#5682C2] p-3 rounded-full shadow-md hover:bg-[#18222C] hover:text-white transition-all duration-300"
+        aria-label="Next Slide"
+      >
+        <ArrowRightIcon className="w-6 h-6" />
+      </button>
       <AnimatePresence mode="wait">
         <motion.div
           key={currentSlide}
@@ -41,27 +61,39 @@ export default function HeroSlider() {
         />
       </AnimatePresence>
       
-      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/30" />
       
-      <div className="relative z-10 container mx-auto px-6 text-center">
+      <div className="relative z-10 container mx-auto px-6 text-center flex items-center justify-center min-h-screen">
         <motion.div
-          className="max-w-4xl mx-auto"
+          className="max-w-4xl mx-auto w-full"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <motion.h1 
-            className="text-5xl md:text-7xl font-bold mb-6 leading-tight"
+            className="text-5xl md:text-7xl font-bold mb-6 leading-tight text-center"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <span className="gradient-text">Innovative</span> Software<br />
-            Solutions for Tomorrow
+            <span 
+              style={{ 
+                background: 'linear-gradient(90deg, #2EB1CB, #5682C2)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                color: 'transparent',
+                display: 'inline-block'
+              }}
+            >
+              Innovative Software
+            </span>
+            <br />
+            <span className="text-white drop-shadow-lg">Solutions for Tomorrow</span>
           </motion.h1>
           
           <motion.p
-            className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto"
+            className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed drop-shadow-lg"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
@@ -70,24 +102,24 @@ export default function HeroSlider() {
           </motion.p>
           
           <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
             <motion.button
-              className="gradient-bg-blue text-white px-8 py-4 rounded-lg font-semibold shadow-lg"
-              whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(59, 130, 246, 0.4)" }}
-              whileTap={{ scale: 0.95 }}
+              className="bg-[#10151A] border border-[#2EB1CB] text-[#2EB1CB] px-8 py-4 rounded-lg font-semibold shadow-md hover:bg-[#18222C] hover:text-white transition-all duration-300 text-lg"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
               onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
             >
               Get Started
             </motion.button>
             
             <motion.button
-              className="border-2 border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300"
+              className="bg-[#10151A] border border-[#5682C2] text-[#5682C2] px-8 py-4 rounded-lg font-semibold shadow-md hover:bg-[#18222C] hover:text-white transition-all duration-300 text-lg"
               whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileTap={{ scale: 0.97 }}
               onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })}
             >
               View Our Work

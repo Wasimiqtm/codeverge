@@ -1,6 +1,4 @@
-import { users, contacts, type User, type InsertUser, type Contact, type InsertContact } from "@shared/schema";
-import { db } from "./db";
-import { eq } from "drizzle-orm";
+import { type User, type InsertUser, type Contact, type InsertContact } from "@shared/schema";
 
 export interface IStorage {
   getUser(id: number): Promise<User | undefined>;
@@ -10,36 +8,45 @@ export interface IStorage {
   getContacts(): Promise<Contact[]>;
 }
 
-export class DatabaseStorage implements IStorage {
+export class InMemoryStorage implements IStorage {
+  private users: User[] = [];
+  private contacts: Contact[] = [];
+  private userIdCounter = 1;
+  private contactIdCounter = 1;
+
   async getUser(id: number): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.id, id));
-    return user || undefined;
+    return this.users.find(user => user.id === id);
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.username, username));
-    return user || undefined;
+    return this.users.find(user => user.username === username);
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const [user] = await db
-      .insert(users)
-      .values(insertUser)
-      .returning();
+    const user: User = {
+      id: this.userIdCounter++,
+      ...insertUser,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+    this.users.push(user);
     return user;
   }
 
   async createContact(insertContact: InsertContact): Promise<Contact> {
-    const [contact] = await db
-      .insert(contacts)
-      .values(insertContact)
-      .returning();
+    const contact: Contact = {
+      id: this.contactIdCounter++,
+      ...insertContact,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+    this.contacts.push(contact);
     return contact;
   }
 
   async getContacts(): Promise<Contact[]> {
-    return await db.select().from(contacts).orderBy(contacts.createdAt);
+    return [...this.contacts].sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
   }
 }
 
-export const storage = new DatabaseStorage();
+export const storage = new InMemoryStorage();
