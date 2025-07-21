@@ -63,11 +63,18 @@ export default function HeroSlider() {
       
       <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/30" />
       
-      <div className="relative z-10 container mx-auto px-6 text-center flex items-center justify-center min-h-screen">
+      <motion.div
+        className="relative z-10 container mx-auto px-6 text-center flex items-center justify-center min-h-screen"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+      >
         <motion.div
           className="max-w-4xl mx-auto w-full"
           initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <motion.h1 
@@ -126,7 +133,7 @@ export default function HeroSlider() {
             </motion.button>
           </motion.div>
         </motion.div>
-      </div>
+      </motion.div>
       
       {/* Slider Navigation Dots */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">

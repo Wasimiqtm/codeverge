@@ -53,16 +53,29 @@ export default function Header() {
           <div className="hidden md:flex space-x-8">
             {[
               { label: "Home", id: "home" },
-              { label: "About", id: "about" },
+              { label: "Stats", id: "about" },
+              { label: "Fintech", id: "fintech" },
               { label: "Services", id: "services" },
+              { label: "FAQ", id: "faq" },
+              { label: "Clients", id: "clients" },
               { label: "Contact", id: "contact" }
             ].map((item) => (
               <motion.button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="hover:text-blue-400 transition-colors duration-300 font-medium"
+                className="transition-colors duration-300 font-bold text-lg px-2"
+                style={{
+                  background: 'linear-gradient(90deg, #9FA2AB, #fff)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  color: 'transparent',
+                  textShadow: '0 2px 8px #232B36',
+                }}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
+                onMouseEnter={e => (e.currentTarget.style as any).webkitTextFillColor = '#60a5fa'}
+                onMouseLeave={e => (e.currentTarget.style as any).webkitTextFillColor = 'transparent'}
               >
                 {item.label}
               </motion.button>
@@ -96,15 +109,28 @@ export default function Header() {
           <div className="flex flex-col space-y-4 mt-4">
             {[
               { label: "Home", id: "home" },
-              { label: "About", id: "about" },
+              { label: "Stats", id: "about" },
+              { label: "Fintech", id: "fintech" },
               { label: "Services", id: "services" },
+              { label: "FAQ", id: "faq" },
+              { label: "Clients", id: "clients" },
               { label: "Contact", id: "contact" }
             ].map((item) => (
               <motion.button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="hover:text-blue-400 transition-colors duration-300 font-medium text-left"
+                className="transition-colors duration-300 font-bold text-lg text-left px-2"
+                style={{
+                  background: 'linear-gradient(90deg, #9FA2AB, #fff)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  color: 'transparent',
+                  textShadow: '0 2px 8px #232B36',
+                }}
                 whileHover={{ x: 10 }}
+                onMouseEnter={e => (e.currentTarget.style as any).webkitTextFillColor = '#60a5fa'}
+                onMouseLeave={e => (e.currentTarget.style as any).webkitTextFillColor = 'transparent'}
               >
                 {item.label}
               </motion.button>

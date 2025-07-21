@@ -1,25 +1,32 @@
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send, Linkedin, Twitter, Github } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Linkedin, Twitter, Instagram, Facebook } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { insertContactSchema } from "@shared/schema";
+import { z } from "zod";
+// Custom schema for validation
+const contactSchema = z.object({
+  name: z.string().min(2, "Full Name is required"),
+  email: z.string().email("Enter a valid email address"),
+  company: z.string().min(2, "Company is required"),
+  service: z.string().min(1, "Please select a service"),
+  message: z.string().min(10, "Message must be at least 10 characters")
+});
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
-import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 
-type ContactFormData = z.infer<typeof insertContactSchema>;
+type ContactFormData = z.infer<typeof contactSchema>;
 
 export default function ContactForm() {
   const { toast } = useToast();
   
-  const form = useForm<ContactFormData>({
-    resolver: zodResolver(insertContactSchema),
+  const form = useForm({
+    resolver: zodResolver(contactSchema),
     defaultValues: {
       name: "",
       email: "",
@@ -55,7 +62,13 @@ export default function ContactForm() {
 
   return (
     <section id="contact" className="py-20 bg-gradient-to-b from-black to-slate-900">
-      <div className="container mx-auto px-6">
+      <motion.div
+        className="container mx-auto px-6"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+      >
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
@@ -63,8 +76,18 @@ export default function ContactForm() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Get In <span className="gradient-text">Touch</span>
+          <h2
+            className="text-4xl md:text-5xl font-extrabold mb-6"
+            style={{
+              background: 'linear-gradient(90deg, #9FA2AB, #fff)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              color: 'transparent',
+              display: 'inline-block',
+            }}
+          >
+            Get In Touch
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
             Ready to transform your business? Let's discuss how our innovative solutions can drive your success.
@@ -129,8 +152,9 @@ export default function ContactForm() {
               <div className="flex space-x-4">
                 {[
                   { icon: Linkedin, href: "#" },
+                  { icon: Instagram, href: "#" },
                   { icon: Twitter, href: "#" },
-                  { icon: Github, href: "#" }
+                  { icon: Facebook, href: "#" }
                 ].map((social, index) => (
                   <motion.a
                     key={index}
@@ -156,7 +180,7 @@ export default function ContactForm() {
           >
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                   <FormField
                     control={form.control}
                     name="name"
@@ -166,7 +190,7 @@ export default function ContactForm() {
                         <FormControl>
                           <Input
                             {...field}
-                            className="bg-slate-800 border-slate-600 text-white focus:border-blue-400"
+                            className="bg-slate-800 border-slate-600 text-white focus:border-blue-400 w-full px-3 py-2 md:px-4 md:py-3"
                             placeholder="Your full name"
                           />
                         </FormControl>
@@ -185,7 +209,7 @@ export default function ContactForm() {
                           <Input
                             {...field}
                             type="email"
-                            className="bg-slate-800 border-slate-600 text-white focus:border-blue-400"
+                            className="bg-slate-800 border-slate-600 text-white focus:border-blue-400 w-full px-3 py-2 md:px-4 md:py-3"
                             placeholder="your.email@example.com"
                           />
                         </FormControl>
@@ -204,7 +228,7 @@ export default function ContactForm() {
                       <FormControl>
                         <Input
                           {...field}
-                          className="bg-slate-800 border-slate-600 text-white focus:border-blue-400"
+                          className="bg-slate-800 border-slate-600 text-white focus:border-blue-400 w-full px-3 py-2 md:px-4 md:py-3"
                           placeholder="Your company name"
                         />
                       </FormControl>
@@ -221,15 +245,19 @@ export default function ContactForm() {
                       <FormLabel className="text-gray-300">Service Interest</FormLabel>
                       <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
-                          <SelectTrigger className="bg-slate-800 border-slate-600 text-white focus:border-blue-400">
+                          <SelectTrigger className="bg-slate-800 border-slate-600 text-white focus:border-blue-400 w-full px-3 py-2 md:px-4 md:py-3">
                             <SelectValue placeholder="Select a service" />
                           </SelectTrigger>
                         </FormControl>
-                        <SelectContent className="bg-slate-800 border-slate-600">
-                          <SelectItem value="ai">Generative AI</SelectItem>
-                          <SelectItem value="development">Applications Development</SelectItem>
-                          <SelectItem value="staffing">Staff Augmentation</SelectItem>
-                          <SelectItem value="dynamics">Dynamics 365</SelectItem>
+                        <SelectContent className="bg-slate-800 border-slate-600 z-50">
+                          <SelectItem value="Generative AI">Generative AI</SelectItem>
+                          <SelectItem value="Web Development">Web Development</SelectItem>
+                          <SelectItem value="App Development">App Development</SelectItem>
+                          <SelectItem value="PEN Testing">PEN Testing</SelectItem>
+                          <SelectItem value="Graphic Designing">Graphic Designing</SelectItem>
+                          <SelectItem value="UI/UX Designing">UI/UX Designing</SelectItem>
+                          <SelectItem value="Staff Augmentation">Staff Augmentation</SelectItem>
+                          <SelectItem value="Dynamics 365">Dynamics 365</SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage />
@@ -247,7 +275,7 @@ export default function ContactForm() {
                         <Textarea
                           {...field}
                           rows={6}
-                          className="bg-slate-800 border-slate-600 text-white focus:border-blue-400 resize-none"
+                          className="bg-slate-800 border-slate-600 text-white focus:border-blue-400 resize-none w-full px-3 py-2 md:px-4 md:py-3"
                           placeholder="Tell us about your project..."
                         />
                       </FormControl>
@@ -260,7 +288,8 @@ export default function ContactForm() {
                   <Button
                     type="submit"
                     disabled={submitContact.isPending}
-                    className="w-full gradient-bg-blue text-white py-4 rounded-lg font-semibold shadow-lg hover:shadow-xl"
+                    className="w-full text-white py-3 md:py-4 rounded-lg font-semibold shadow-lg hover:shadow-xl border-2 border-[#9FA2AB] bg-transparent hover:bg-[#232B36] hover:border-white transition-all duration-300"
+                    style={{ borderColor: '#9FA2AB' }}
                   >
                     <Send className="w-4 h-4 mr-2" />
                     {submitContact.isPending ? "Sending..." : "Send Message"}
@@ -270,7 +299,7 @@ export default function ContactForm() {
             </Form>
           </motion.div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

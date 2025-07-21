@@ -1,20 +1,35 @@
 import Header from "@/components/header";
+import Loader from "@/components/loader";
 import HeroSlider from "@/components/hero-slider";
 import FeaturedStats from "@/components/featured-stats";
 import ServicesGrid from "@/components/services-grid";
-import TestimonialCarousel from "@/components/testimonial-carousel";
-import ContactForm from "@/components/contact-form";
 import Footer from "@/components/footer";
+import { Suspense, lazy } from "react";
+const FintechExpertise = lazy(() => import("@/components/fintech-expertise"));
+const FaqSection = lazy(() => import("@/components/faq-section"));
+const TestimonialCarousel = lazy(() => import("@/components/testimonial-carousel"));
+const ContactForm = lazy(() => import("@/components/contact-form"));
 
 export default function Home() {
   return (
     <div className="min-h-screen overflow-x-hidden">
+      <Loader />
       <Header />
       <HeroSlider />
       <FeaturedStats />
+      <Suspense fallback={null}>
+        <FintechExpertise />
+      </Suspense>
       <ServicesGrid />
-      <TestimonialCarousel />
-      <ContactForm />
+      <Suspense fallback={null}>
+        <FaqSection />
+      </Suspense>
+      <Suspense fallback={null}>
+        <TestimonialCarousel />
+      </Suspense>
+      <Suspense fallback={null}>
+        <ContactForm />
+      </Suspense>
       <Footer />
     </div>
   );
