@@ -140,7 +140,7 @@ export default function ServicesGrid() {
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 min-w-0">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-16 min-w-0">
           {services.map((service, index) => (
             <motion.div
               key={service.title}
@@ -168,6 +168,13 @@ export default function ServicesGrid() {
               <div className="p-2 md:p-4 flex-1 flex flex-col">
                 <h3
                   className="text-xl md:text-2xl font-bold mb-4 break-words"
+                  style={{
+                    background: 'linear-gradient(90deg, #2EB1CB, #5682C2, #9FA2AB)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                    color: 'transparent',
+                  }}
                 >
                   {service.title}
                 </h3>
