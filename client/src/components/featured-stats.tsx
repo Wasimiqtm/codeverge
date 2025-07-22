@@ -68,7 +68,7 @@ function StatCard({ target, label, description, icon: Icon, color, delay, extra 
   return (
     <motion.div
       ref={ref}
-      className="bg-[#10151A] rounded-2xl p-8 flex flex-col items-center shadow-lg hover:shadow-2xl transition-all duration-300 border border-[#232B36]"
+      className="bg-[#10151A] rounded-2xl p-8 flex flex-col items-center shadow-lg hover:shadow-2xl hover:shadow-[#2EB1CB]/30 transition-all duration-300 border border-[#232B36] cursor-pointer"
       initial={{ opacity: 0, y: 50 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
       transition={{ duration: 0.8, delay: delay / 1000 }}
@@ -102,13 +102,7 @@ export default function FeaturedStats() {
 
   return (
     <section id="about" className="py-20 bg-gradient-to-b from-slate-800 to-slate-900">
-      <motion.div
-        className="container mx-auto px-6"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-      >
+      <div className="container mx-auto px-6">
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
@@ -142,7 +136,7 @@ export default function FeaturedStats() {
             <StatCard key={stat.label} {...stat} />
           ))}
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

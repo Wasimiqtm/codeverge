@@ -62,13 +62,7 @@ export default function ContactForm() {
 
   return (
     <section id="contact" className="py-20 bg-gradient-to-b from-black to-slate-900">
-      <motion.div
-        className="container mx-auto px-6"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-      >
+      <div className="container mx-auto px-6">
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
@@ -243,23 +237,29 @@ export default function ContactForm() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-gray-300">Service Interest</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
-                          <SelectTrigger className="bg-slate-800 border-slate-600 text-white focus:border-blue-400 w-full px-3 py-2 md:px-4 md:py-3">
-                            <SelectValue placeholder="Select a service" />
-                          </SelectTrigger>
+                        <div className="relative">
+                          <select
+                            {...field}
+                            className="bg-slate-800 border border-slate-600 w-full px-3 py-2 md:px-4 md:py-3 text-white focus:border-blue-400 placeholder-gray-400 rounded-lg pr-10 appearance-none"
+                            style={{ color: field.value ? '#fff' : '#9FA2AB' }}
+                          >
+                            <option value="" disabled hidden style={{ color: '#9FA2AB' }}>
+                              Select a service
+                            </option>
+                            <option value="ai" style={{ color: '#fff' }}>Generative AI</option>
+                            <option value="web" style={{ color: '#fff' }}>Web Development</option>
+                            <option value="app" style={{ color: '#fff' }}>App Development</option>
+                            <option value="pentest" style={{ color: '#fff' }}>PEN Testing</option>
+                            <option value="graphic" style={{ color: '#fff' }}>Graphic Designing</option>
+                            <option value="uiux" style={{ color: '#fff' }}>UI/UX Designing</option>
+                            <option value="staff" style={{ color: '#fff' }}>Staff Augmentation</option>
+                            <option value="d365" style={{ color: '#fff' }}>Dynamics 365</option>
+                          </select>
+                          {/* Custom caret icon absolutely positioned to match right padding */}
+                          <svg className="pointer-events-none absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" /></svg>
+                        </div>
                         </FormControl>
-                        <SelectContent className="bg-slate-800 border-slate-600 z-50">
-                          <SelectItem value="Generative AI">Generative AI</SelectItem>
-                          <SelectItem value="Web Development">Web Development</SelectItem>
-                          <SelectItem value="App Development">App Development</SelectItem>
-                          <SelectItem value="PEN Testing">PEN Testing</SelectItem>
-                          <SelectItem value="Graphic Designing">Graphic Designing</SelectItem>
-                          <SelectItem value="UI/UX Designing">UI/UX Designing</SelectItem>
-                          <SelectItem value="Staff Augmentation">Staff Augmentation</SelectItem>
-                          <SelectItem value="Dynamics 365">Dynamics 365</SelectItem>
-                        </SelectContent>
-                      </Select>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -299,7 +299,7 @@ export default function ContactForm() {
             </Form>
           </motion.div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Eye, ArrowLeft, ArrowRight as ArrowRightIcon } from "lucide-react";
+import Lottie from "lottie-react";
 
 const slides = [
   {
@@ -17,15 +18,24 @@ const slides = [
   }
 ];
 
+// Sample Lottie animation (theme-friendly tech/human)
+const lottieUrl = "https://assets2.lottiefiles.com/packages/lf20_2glqweqs.json";
+
 export default function HeroSlider() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [lottieData, setLottieData] = useState<any>(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
-
     return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    fetch(lottieUrl)
+      .then((res) => res.json())
+      .then((data) => setLottieData(data));
   }, []);
 
   const goToPrev = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
@@ -60,95 +70,72 @@ export default function HeroSlider() {
           transition={{ duration: 1 }}
         />
       </AnimatePresence>
-      
       <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/30" />
-      
       <motion.div
-        className="relative z-10 container mx-auto px-6 text-center flex items-center justify-center min-h-screen"
+        className="relative z-10 container mx-auto px-6 flex flex-col md:flex-row items-center justify-center min-h-screen"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.8, delay: 0.2 }}
       >
-        <motion.div
-          className="max-w-4xl mx-auto w-full"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          <motion.h1 
-            className="text-5xl md:text-7xl font-bold mb-6 leading-tight text-center"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            <span 
-              style={{ 
-                background: 'linear-gradient(90deg, #2EB1CB, #5682C2)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-                color: 'transparent',
-                display: 'inline-block'
-              }}
+        {/* Lottie Animation (left on desktop, top on mobile) */}
+        <div className="w-full md:w-1/2 flex justify-center items-center mb-8 md:mb-0 md:mr-8">
+          {lottieData && (
+            <div className="rounded-full bg-gradient-to-br from-[#2EB1CB]/30 to-[#5682C2]/10 p-2 shadow-2xl" style={{ boxShadow: '0 0 32px 8px #2EB1CB33' }}>
+              <Lottie
+                autoplay
+                loop
+                animationData={lottieData}
+                style={{ height: '320px', width: '320px', maxWidth: '100%' }}
+                className="drop-shadow-xl"
+                rendererSettings={{ preserveAspectRatio: 'xMidYMid slice' }}
+                aria-label="AI-powered human digital transformation animation"
+              />
+            </div>
+          )}
+        </div>
+        <div className="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left">
+          <div className="max-w-4xl mx-auto w-full">
+            <motion.h1
+              className="mt-12 text-4xl md:text-6xl font-bold mb-6 leading-tight"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
             >
-              Innovative Software
-            </span>
-            <br />
-            <span className="text-white drop-shadow-lg">Solutions for Tomorrow</span>
-          </motion.h1>
-          
-          <motion.p
-            className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed drop-shadow-lg"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-          >
-            Transforming businesses through cutting-edge technology, AI-powered solutions, and expert development services.
-          </motion.p>
-          
-          <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-          >
-            <motion.button
-              className="bg-[#10151A] border border-[#2EB1CB] text-[#2EB1CB] px-8 py-4 rounded-lg font-semibold shadow-md hover:bg-[#18222C] hover:text-white transition-all duration-300 text-lg"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.97 }}
-              onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+              <span
+                style={{
+                  background: 'linear-gradient(90deg, #2EB1CB, #5682C2)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  color: 'transparent',
+                  display: 'inline-block'
+                }}
+              >
+                Innovative Software
+              </span>
+              <br />
+              <span className="text-white drop-shadow-lg">Solutions for Tomorrow</span>
+            </motion.h1>
+            <motion.p
+              className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed drop-shadow-lg"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
             >
-              Get Started
-            </motion.button>
-            
-            <motion.button
-              className="bg-[#10151A] border border-[#5682C2] text-[#5682C2] px-8 py-4 rounded-lg font-semibold shadow-md hover:bg-[#18222C] hover:text-white transition-all duration-300 text-lg"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.97 }}
-              onClick={() => document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })}
+              Transforming businesses through cutting-edge technology, AI-powered solutions, and expert development services.
+            </motion.p>
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start items-center"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
             >
-              View Our Work
-            </motion.button>
-          </motion.div>
-        </motion.div>
+              {/* Add CTA buttons here if needed */}
+            </motion.div>
+          </div>
+        </div>
       </motion.div>
-      
-      {/* Slider Navigation Dots */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
-        {slides.map((_, index) => (
-          <motion.button
-            key={index}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              index === currentSlide ? "bg-blue-500" : "bg-white/50 hover:bg-white/80"
-            }`}
-            onClick={() => setCurrentSlide(index)}
-            whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 0.8 }}
-          />
-        ))}
-      </div>
     </section>
   );
 }

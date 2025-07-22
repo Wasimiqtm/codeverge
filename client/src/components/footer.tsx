@@ -20,7 +20,19 @@ export default function Footer() {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <span className="text-2xl font-bold gradient-text">CodeVerge</span>
+              <span
+                className="text-2xl font-bold"
+                style={{
+                  background: 'linear-gradient(90deg, #2EB1CB, #5682C2, #9FA2AB)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  color: 'transparent',
+                  display: 'inline-block',
+                }}
+              >
+                CodeVerge
+              </span>
             </motion.div>
             <p className="text-gray-400 max-w-md">
               Transforming businesses through innovative software solutions, AI-powered technologies, and expert development services.
@@ -56,8 +68,24 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Newsletter Section (moved to right) */}
-          <div className="col-span-1"><NewsletterFooter /></div>
+          <div className="col-span-1">
+            <h4 className="text-white font-semibold mb-4">Quick Links</h4>
+            <ul className="space-y-2 break-words">
+              {[
+                { label: "Home", href: "#home" },
+                { label: "Services", href: "#services" },
+                { label: "Case Studies", href: "#case-studies" },
+                { label: "How We Work", href: "#how-we-work" },
+                { label: "Contact", href: "#contact" },
+              ].map((item) => (
+                <motion.li key={item.label} whileHover={{ x: 5 }}>
+                  <a href={item.href} className="text-gray-400 hover:text-blue-400 transition-colors duration-300">
+                    {item.label}
+                  </a>
+                </motion.li>
+              ))}
+            </ul>
+          </div>
         </div>
         
         <motion.div 
@@ -72,48 +100,5 @@ export default function Footer() {
         </motion.div>
       </div>
     </footer>
-  );
-}
-
-// NewsletterFooter component
-function NewsletterFooter() {
-  const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState(false);
-  function validateEmail(val: string) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
-  }
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setSuccess(false);
-    if (!validateEmail(email)) {
-      setError("Please enter a valid email address.");
-      return;
-    }
-    setError("");
-    setSuccess(true);
-    setEmail("");
-  }
-  return (
-    <div>
-      <h4 className="text-white font-semibold mb-4">Newsletter</h4>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-        <input
-          type="email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          placeholder="Your email address"
-          className="bg-[#10151A] border border-[#9FA2AB] rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-400 placeholder:text-[#9FA2AB] w-full"
-        />
-        <button
-          type="submit"
-          className="bg-gradient-to-r from-[#2EB1CB] to-[#9FA2AB] text-white font-semibold rounded-lg px-4 py-2 mt-1 hover:from-[#5682C2] hover:to-[#2EB1CB] transition-all w-full"
-        >
-          Subscribe
-        </button>
-        {error && <span className="text-red-400 text-xs mt-1">{error}</span>}
-        {success && <span className="text-green-400 text-xs mt-1">Thank you for subscribing!</span>}
-      </form>
-    </div>
   );
 }

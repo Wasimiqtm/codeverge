@@ -47,18 +47,32 @@ export default function Header() {
                 className="w-full h-full object-cover"
               />
             </div>
-            <span className="text-xl font-bold gradient-text">CodeVerge</span>
+            <span
+              className="text-2xl font-bold"
+              style={{
+                background: 'linear-gradient(90deg, #2EB1CB, #5682C2, #9FA2AB)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                color: 'transparent',
+                display: 'inline-block',
+              }}
+            >
+              CodeVerge
+            </span>
           </motion.div>
           
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex space-x-5">
             {[
               { label: "Home", id: "home" },
               { label: "Stats", id: "about" },
+              { label: "Case Studies", id: "case-studies" },
+              { label: "How We Work", id: "how-we-work" },
               { label: "Fintech", id: "fintech" },
               { label: "Services", id: "services" },
               { label: "FAQ", id: "faq" },
               { label: "Clients", id: "clients" },
-              { label: "Contact", id: "contact" }
+              { label: "Contact", id: "contact" },
             ].map((item) => (
               <motion.button
                 key={item.id}

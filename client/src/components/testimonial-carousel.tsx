@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef } from "react";
 import { Star } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, A11y } from "swiper/modules";
@@ -31,8 +31,22 @@ const testimonials = [
 ];
 
 export default function TestimonialCarousel() {
+  const swiperRef = useRef(null);
+
+  // Custom navigation handlers to reverse direction
+  const handlePrev = () => {
+    if (swiperRef.current) {
+      swiperRef.current.swiper.slideNext(); // Left arrow goes to next
+    }
+  };
+  const handleNext = () => {
+    if (swiperRef.current) {
+      swiperRef.current.swiper.slidePrev(); // Right arrow goes to previous
+    }
+  };
+
   return (
-    <section className="py-20 bg-gradient-to-b from-slate-800 to-slate-900">
+    <section id="clients" className="py-20 bg-gradient-to-b from-slate-800 to-slate-900">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2
@@ -53,9 +67,28 @@ export default function TestimonialCarousel() {
           </p>
         </div>
         <div className="relative max-w-6xl mx-auto">
+          {/* Custom navigation arrows */}
+          <button
+            onClick={handlePrev}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-[#10151A] border border-[#2EB1CB] text-[#2EB1CB] p-3 rounded-full shadow-md hover:bg-[#18222C] hover:text-white transition-all duration-300"
+            aria-label="Previous Slide"
+            style={{ left: '-2.5rem' }}
+          >
+            {/* Left Arrow Icon */}
+            <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-left"><path d="M15 18l-6-6 6-6" /></svg>
+          </button>
+          <button
+            onClick={handleNext}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-[#10151A] border border-[#5682C2] text-[#5682C2] p-3 rounded-full shadow-md hover:bg-[#18222C] hover:text-white transition-all duration-300"
+            aria-label="Next Slide"
+            style={{ right: '-2.5rem' }}
+          >
+            {/* Right Arrow Icon */}
+            <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-right"><path d="M9 18l6-6-6-6" /></svg>
+          </button>
           <Swiper
+            ref={swiperRef}
             modules={[Navigation, Pagination, A11y]}
-            navigation
             pagination={{ clickable: true }}
             spaceBetween={32}
             slidesPerView={1}

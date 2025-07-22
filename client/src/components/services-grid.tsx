@@ -1,4 +1,3 @@
-import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Brain, Code, Users, BarChart3, CheckCircle } from "lucide-react";
 
@@ -103,24 +102,11 @@ const services = [
 
 export default function ServicesGrid() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true });
 
   return (
     <section id="services" className="py-20" style={{ background: 'linear-gradient(135deg, #10151A 60%, #232B36 80%, #9FA2AB 100%)' }}>
-      <motion.div
-        className="container mx-auto px-6"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-      >
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8 }}
-          ref={ref}
-        >
+      <div className="container mx-auto px-6">
+        <div className="text-center mb-16" ref={ref}>
           <h2
             className="text-4xl md:text-5xl font-extrabold mb-6"
             style={{
@@ -135,77 +121,69 @@ export default function ServicesGrid() {
             Our Core Services
           </h2>
           <p className="text-2xl text-[#B0C4D8] max-w-3xl mx-auto font-medium mb-2">
-            Comprehensive technology solutions tailored to drive your business forward in the digital age.<br/>
+            Comprehensive technology solutions tailored to drive your business forward in the digital age.<br />
             <span className="text-[#6CA0C8] text-lg block mt-2">From AI-powered automation to scalable app development, we empower your business to thrive in a digital-first world.</span>
           </p>
-        </motion.div>
-        
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-16 min-w-0">
-          {services.map((service, index) => (
-            <motion.div
+          {services.map((service) => (
+            <div
               key={service.title}
-              className="service-card-hover gradient-bg-dark rounded-2xl overflow-hidden min-w-0 flex flex-col"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
-              whileHover={{ y: -10, scale: 1.02 }}
+              className="relative group bg-white/10 backdrop-blur-lg border-2 border-[#2EB1CB]/30 shadow-xl rounded-3xl overflow-hidden min-w-0 flex flex-col transition-all duration-300 hover:shadow-2xl hover:shadow-[#2EB1CB]/40 hover:border-[#2EB1CB]/70 cursor-pointer"
+              style={{ boxShadow: '0 8px 32px 0 rgba(46,177,203,0.10)' }}
             >
               <div className="p-2 text-white font-bold text-center md:hidden">{service.title}</div>
-              <div 
+              <div
                 className="w-full h-32 md:h-48 bg-cover bg-center relative"
                 style={{ backgroundImage: `url(${service.image})` }}
               >
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-800 via-transparent to-transparent" />
-                <motion.div 
-                  className="absolute top-4 left-4"
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                >
+                <div className="absolute top-4 left-4">
                   <div className="bg-blue-500/20 backdrop-blur-sm rounded-lg p-3">
                     <service.icon className="text-blue-400 w-6 h-6" />
                   </div>
-                </motion.div>
-              </div>
-              <div className="p-2 md:p-4 flex-1 flex flex-col">
-                <h3
-                  className="text-xl md:text-2xl font-bold mb-4 break-words"
-                  style={{
-                    background: 'linear-gradient(90deg, #2EB1CB, #5682C2, #9FA2AB)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                    color: 'transparent',
-                  }}
-                >
-                  {service.title}
-                </h3>
-                <p className="text-lg text-[#B0C4D8] mb-6 font-medium text-left break-words">{service.description}</p>
-                <ul className="text-base space-y-2 mb-6 break-words">
-                  {service.features.map((feature) => (
-                    <motion.li 
-                      key={feature}
-                      className="flex items-center justify-center text-[#9FA2AB] font-semibold"
-                      whileHover={{ x: 5 }}
-                    >
-                      <CheckCircle className="text-[#2EB1CB] w-5 h-5 mr-2 flex-shrink-0" />
-                      {feature}
-                    </motion.li>
-                  ))}
-                </ul>
-                <div className="text-center text-sm" style={{ color: '#9FA2AB' }}>
-                  Unlock the next level of digital transformation with our {service.title} expertise.
                 </div>
-                <motion.button
-                  className="w-full bg-gradient-to-r from-[#2EB1CB] to-[#9FA2AB] text-white py-3 rounded-lg font-bold shadow-md hover:from-[#5682C2] hover:to-[#2EB1CB] transition-all duration-300 mt-4"
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.98 }}
+              </div>
+              <div className="p-2 md:p-4 flex-1 flex flex-col justify-between">
+                <div>
+                  <h3
+                    className="text-xl md:text-2xl font-bold mb-4 break-words text-left"
+                    style={{
+                      background: 'linear-gradient(90deg, #2EB1CB, #5682C2, #9FA2AB)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                      color: 'transparent',
+                    }}
+                  >
+                    {service.title}
+                  </h3>
+                  <p className="text-lg text-[#B0C4D8] mb-6 font-medium text-left break-words">{service.description}</p>
+                  <ul className="text-base space-y-2 mb-6 break-words text-left pl-0">
+                    {service.features.map((feature) => (
+                      <li
+                        key={feature}
+                        className="flex items-center text-[#9FA2AB] font-semibold text-left"
+                      >
+                        <CheckCircle className="text-[#2EB1CB] w-5 h-5 mr-2 flex-shrink-0" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="text-left text-sm" style={{ color: '#9FA2AB' }}>
+                    Unlock the next level of digital transformation with our {service.title} expertise.
+                  </div>
+                </div>
+                <button
+                  className="mt-6 w-full bg-gradient-to-r from-[#2EB1CB] to-[#9FA2AB] text-white py-3 rounded-lg font-bold shadow-lg hover:from-[#5682C2] hover:to-[#2EB1CB] transition-all duration-300 text-lg tracking-wide focus:outline-none focus:ring-2 focus:ring-[#2EB1CB]/40"
                 >
                   Learn More
-                </motion.button>
+                </button>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

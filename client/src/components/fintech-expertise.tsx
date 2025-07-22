@@ -20,7 +20,7 @@ export default function FintechExpertise() {
   }, []);
 
   return (
-    <section className="py-20 bg-gradient-to-b from-[#10151A] via-[#18222C] to-[#232B36]">
+    <section id="fintech" className="py-20 bg-gradient-to-b from-[#10151A] via-[#18222C] to-[#232B36]">
       <motion.div
         className="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12"
         initial={{ opacity: 0, y: 50 }}
