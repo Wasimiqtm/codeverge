@@ -71,8 +71,10 @@ export default function Header() {
               { label: "Home", id: "home" },
               { label: "About", id: "about" },
               { label: "Services", id: "services" },
-              { label: "Case Studies", id: "case-studies" },
               { label: "How We Work", id: "how-we-work" },
+              { label: "Fintech", id: "fintech" },
+              { label: "Clients", id: "clients" },
+              { label: "FAQ", id: "faq" },
               { label: "Contact", id: "contact" },
             ].map((item) => (
               <motion.button
@@ -123,8 +125,10 @@ export default function Header() {
               { label: "Home", id: "home" },
               { label: "About", id: "about" },
               { label: "Services", id: "services" },
-              { label: "Case Studies", id: "case-studies" },
               { label: "How We Work", id: "how-we-work" },
+              { label: "Fintech", id: "fintech" },
+              { label: "Clients", id: "clients" },
+              { label: "FAQ", id: "faq" },
               { label: "Contact", id: "contact" }
             ].map((item) => (
               <motion.button

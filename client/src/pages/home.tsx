@@ -9,7 +9,6 @@ const FintechExpertise = lazy(() => import("@/components/fintech-expertise"));
 const FaqSection = lazy(() => import("@/components/faq-section"));
 const TestimonialCarousel = lazy(() => import("@/components/testimonial-carousel"));
 const ContactForm = lazy(() => import("@/components/contact-form"));
-const CaseStudies = lazy(() => import("@/components/case-studies"));
 const HowWeWork = lazy(() => import("@/components/how-we-work"));
 import StickyCTA from "@/components/sticky-cta";
 import NewsletterSignup from "@/components/newsletter-signup";
@@ -23,12 +22,11 @@ export default function Home() {
       <HeroSlider />
       <FeaturedStats />
       <Suspense fallback={null}>
-        <CaseStudies />
+        <ServicesGrid />
         <HowWeWork />
         <FintechExpertise />
-        <ServicesGrid />
-        <FaqSection />
         <TestimonialCarousel />
+        <FaqSection />
         <ContactForm />
       </Suspense>
       <NewsletterSignup />
