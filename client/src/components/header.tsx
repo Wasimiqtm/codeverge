@@ -33,21 +33,21 @@ export default function Header() {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <nav className="container mx-auto px-6 py-4">
+      <nav className="container mx-auto px-6 py-2">
         <div className="flex items-center justify-between">
           <motion.div 
             className="flex items-center space-x-3"
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
-            <div className="w-12 h-12 rounded-lg flex items-center justify-center overflow-hidden">
+            <div className="w-24 h-12 rounded-lg flex items-center justify-center overflow-hidden">
               <img 
                 src="/attached_assets/codeverge.png" 
                 alt="CodeVerge Logo" 
-                className="w-full h-full object-cover"
+                className="w-18 h-10 object-contain"
               />
             </div>
-            <span
+            {/* <span
               className="text-2xl font-bold"
               style={{
                 background: 'linear-gradient(90deg, #2EB1CB, #5682C2, #9FA2AB)',
@@ -59,7 +59,7 @@ export default function Header() {
               }}
             >
               CodeVerge
-            </span>
+            </span> */}
           </motion.div>
           
           <div className="hidden md:flex space-x-5">

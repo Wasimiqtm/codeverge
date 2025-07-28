@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Brain, Code, Users, BarChart3, CheckCircle } from "lucide-react";
 
 const services = [
@@ -102,6 +102,7 @@ const services = [
 
 export default function ServicesGrid() {
   const ref = useRef(null);
+  const [selectedService, setSelectedService] = useState(null);
 
   return (
     <section id="services" className="py-20" style={{ background: 'linear-gradient(135deg, #10151A 60%, #232B36 80%, #9FA2AB 100%)' }}>
@@ -131,10 +132,10 @@ export default function ServicesGrid() {
               key={service.title}
               className="relative group bg-white/10 backdrop-blur-lg border-2 border-[#2EB1CB]/30 shadow-xl rounded-3xl overflow-hidden min-w-0 flex flex-col transition-all duration-300 hover:shadow-2xl hover:shadow-[#2EB1CB]/40 hover:border-[#2EB1CB]/70 cursor-pointer"
               style={{ boxShadow: '0 8px 32px 0 rgba(46,177,203,0.10)' }}
+              onClick={() => setSelectedService(service)}
             >
-              <div className="p-2 text-white font-bold text-center md:hidden">{service.title}</div>
               <div
-                className="w-full h-32 md:h-48 bg-cover bg-center relative"
+                className="w-full h-48 bg-cover bg-center relative"
                 style={{ backgroundImage: `url(${service.image})` }}
               >
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-800 via-transparent to-transparent" />
@@ -144,45 +145,62 @@ export default function ServicesGrid() {
                   </div>
                 </div>
               </div>
-              <div className="p-2 md:p-4 flex-1 flex flex-col justify-between">
-                <div>
-                  <h3
-                    className="text-xl md:text-2xl font-bold mb-4 break-words text-left"
-                    style={{
-                      background: 'linear-gradient(90deg, #2EB1CB, #5682C2, #9FA2AB)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text',
-                      color: 'transparent',
-                    }}
-                  >
-                    {service.title}
-                  </h3>
-                  <p className="text-lg text-[#B0C4D8] mb-6 font-medium text-left break-words">{service.description}</p>
-                  <ul className="text-base space-y-2 mb-6 break-words text-left pl-0">
-                    {service.features.map((feature) => (
-                      <li
-                        key={feature}
-                        className="flex items-center text-[#9FA2AB] font-semibold text-left"
-                      >
-                        <CheckCircle className="text-[#2EB1CB] w-5 h-5 mr-2 flex-shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="text-left text-sm" style={{ color: '#9FA2AB' }}>
-                    Unlock the next level of digital transformation with our {service.title} expertise.
-                  </div>
-                </div>
-                <button
-                  className="mt-6 w-full bg-gradient-to-r from-[#2EB1CB] to-[#9FA2AB] text-white py-3 rounded-lg font-bold shadow-lg hover:from-[#5682C2] hover:to-[#2EB1CB] transition-all duration-300 text-lg tracking-wide focus:outline-none focus:ring-2 focus:ring-[#2EB1CB]/40"
+              <div className="p-4 flex-1 flex flex-col justify-center items-center">
+                <h3
+                  className="text-xl md:text-2xl font-bold break-words text-center"
+                  style={{
+                    background: 'linear-gradient(90deg, #2EB1CB, #5682C2, #9FA2AB)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                    color: 'transparent',
+                  }}
                 >
-                  Learn More
-                </button>
+                  {service.title}
+                </h3>
               </div>
             </div>
           ))}
         </div>
+        {/* Modal */}
+        {selectedService && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
+            <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full p-8 relative animate-modal-in">
+              <button
+                className="absolute top-4 right-4 text-gray-500 hover:text-blue-500 text-2xl font-bold focus:outline-none"
+                onClick={() => setSelectedService(null)}
+                aria-label="Close"
+              >
+                &times;
+              </button>
+              <div className="flex flex-col items-center">
+                <div
+                  className="w-32 h-32 bg-cover bg-center rounded-xl mb-4"
+                  style={{ backgroundImage: `url(${selectedService.image})` }}
+                />
+                <h3 className="text-3xl font-bold mb-2 text-center" style={{
+                  background: 'linear-gradient(90deg, #2EB1CB, #5682C2, #9FA2AB)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  color: 'transparent',
+                }}>{selectedService.title}</h3>
+                <p className="text-lg text-[#5682C2] mb-4 text-center">{selectedService.description}</p>
+                <ul className="text-base space-y-2 mb-6 text-left w-full max-w-xs mx-auto">
+                  {selectedService.features.map((feature) => (
+                    <li key={feature} className="flex items-center text-[#9FA2AB] font-semibold">
+                      <CheckCircle className="text-[#2EB1CB] w-5 h-5 mr-2 flex-shrink-0" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <div className="text-left text-sm text-[#9FA2AB] mb-2">
+                  Unlock the next level of digital transformation with our {selectedService.title} expertise.
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

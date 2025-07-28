@@ -13,14 +13,14 @@ export default function Footer() {
               className="flex items-center space-x-3 mb-4 md:mb-4 mb-2"
               whileHover={{ scale: 1.05 }}
             >
-              <div className="w-10 h-10 rounded-lg flex items-center justify-center overflow-hidden bg-white">
+              <div className="w-24 h-12 rounded-lg flex items-center justify-center overflow-hidden bg-white">
                 <img
                   src="/attached_assets/codeverges.jpeg"
                   alt="CodeVerge Logo"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <span
+              {/* <span
                 className="text-2xl font-bold"
                 style={{
                   background: 'linear-gradient(90deg, #2EB1CB, #5682C2, #9FA2AB)',
@@ -32,7 +32,7 @@ export default function Footer() {
                 }}
               >
                 CodeVerge
-              </span>
+              </span> */}
             </motion.div>
             <p className="text-gray-400 max-w-md">
               Transforming businesses through innovative software solutions, AI-powered technologies, and expert development services.

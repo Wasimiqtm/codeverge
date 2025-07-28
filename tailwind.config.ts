@@ -79,10 +79,18 @@ export default {
             height: "0",
           },
         },
+        // Modal animation
+        "modal-in": {
+          '0%': { opacity: '0', transform: 'scale(0.9) translateY(40px)' },
+          '60%': { opacity: '1', transform: 'scale(1.03) translateY(-8px)' },
+          '100%': { opacity: '1', transform: 'scale(1) translateY(0)' },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        // Modal animation
+        "modal-in": "modal-in 0.25s cubic-bezier(0.4,0,0.2,1)",
       },
     },
   },
