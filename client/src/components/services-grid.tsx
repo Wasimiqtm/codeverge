@@ -108,22 +108,11 @@ export default function ServicesGrid() {
     <section id="services" className="py-20" style={{ background: 'linear-gradient(135deg, #10151A 60%, #232B36 80%, #9FA2AB 100%)' }}>
       <div className="container mx-auto px-6">
         <div className="text-center mb-16" ref={ref}>
-          <h2
-            className="text-4xl md:text-5xl font-extrabold mb-6"
-            style={{
-              background: 'linear-gradient(90deg, #2EB1CB, #5682C2)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              color: 'transparent',
-              display: 'inline-block',
-            }}
-          >
+          <h2 className="text-heading-1 gradient-text-primary mb-6">
             Our Core Services
           </h2>
-          <p className="text-2xl text-[#B0C4D8] max-w-3xl mx-auto font-medium mb-2">
-            Comprehensive technology solutions tailored to drive your business forward in the digital age.<br />
-            <span className="text-[#6CA0C8] text-lg block mt-2">From AI-powered automation to scalable app development, we empower your business to thrive in a digital-first world.</span>
+          <p className="text-body-large text-secondary max-w-3xl mx-auto mb-2">
+            <span className="text-accent text-body-medium block mt-2">Comprehensive technology solutions tailored to drive your business forward in the digital age.</span>
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-16 min-w-0">
@@ -146,16 +135,7 @@ export default function ServicesGrid() {
                 </div>
               </div>
               <div className="p-4 flex-1 flex flex-col justify-center items-center">
-                <h3
-                  className="text-xl md:text-2xl font-bold break-words text-center"
-                  style={{
-                    background: 'linear-gradient(90deg, #2EB1CB, #5682C2, #9FA2AB)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                    color: 'transparent',
-                  }}
-                >
+                <h3 className="text-heading-4 gradient-text-primary break-words text-center">
                   {service.title}
                 </h3>
               </div>

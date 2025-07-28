@@ -13,6 +13,7 @@ const CaseStudies = lazy(() => import("@/components/case-studies"));
 const HowWeWork = lazy(() => import("@/components/how-we-work"));
 import StickyCTA from "@/components/sticky-cta";
 import NewsletterSignup from "@/components/newsletter-signup";
+import ScrollToTop from "@/components/scroll-to-top";
 
 export default function Home() {
   return (
@@ -33,6 +34,7 @@ export default function Home() {
       <NewsletterSignup />
       <StickyCTA />
       <Footer />
+      <ScrollToTop />
     </div>
   );
 }

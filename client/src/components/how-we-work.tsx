@@ -37,22 +37,12 @@ const steps = [
 
 export default function HowWeWork() {
   return (
-    <section id="how-we-work" className="pt-8 pb-20 bg-gradient-to-b from-[#232B36] via-[#18222C] to-[#10151A] scroll-mt-24">
+    <section id="how-we-work" className="py-16 bg-gradient-to-b from-[#232B36] via-[#18222C] to-[#10151A] scroll-mt-24">
       <div className="container mx-auto px-6">
         <div className="flex justify-center">
-          <h2
-            className="text-4xl md:text-5xl font-extrabold mb-6 text-center"
-            style={{
-              background: 'linear-gradient(90deg, #2EB1CB, #5682C2, #9FA2AB)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              color: 'transparent',
-              display: 'inline-block',
-            }}
-          >
-            How We Work
-          </h2>
+        <h2 className="text-heading-1 gradient-text-primary mb-6 leading-snug">
+  How We Work
+</h2>
         </div>
         <VerticalTimeline lineColor="#232B36">
           {steps.map((step, idx) => (

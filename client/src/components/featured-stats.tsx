@@ -77,21 +77,12 @@ function StatCard({ target, label, description, icon: Icon, color, delay, extra 
       <div className="mb-4 flex items-center justify-center w-16 h-16 rounded-full" style={{ background: `linear-gradient(135deg, ${color}33, #232B36)` }}>
         <Icon className="w-10 h-10" style={{ color }} />
       </div>
-      <div
-        className="text-4xl md:text-5xl font-extrabold mb-2"
-        style={{
-          background: `linear-gradient(90deg, ${color}, #fff)`,
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
-          color: 'transparent',
-        }}
-      >
+      <div className="text-heading-1 gradient-text-primary mb-2">
         {count}+
       </div>
-      <h3 className="text-lg md:text-xl font-semibold mb-1 text-white text-center">{label}</h3>
-      <p className="text-sm text-[#B0C4D8] mb-2 text-center">{description}</p>
-      <p className="text-xs text-[#6CA0C8] text-center">{extra}</p>
+      <h3 className="text-heading-4 text-primary mb-1 text-center">{label}</h3>
+      <p className="text-body-small text-secondary mb-2 text-center">{description}</p>
+      <p className="text-caption text-accent text-center">{extra}</p>
     </motion.div>
   );
 }
@@ -111,22 +102,10 @@ export default function FeaturedStats() {
           transition={{ duration: 0.8 }}
           ref={ref}
         >
-          <h2 
-            className="text-4xl md:text-5xl font-bold mb-6"
-            style={{
-              background: 'linear-gradient(90deg, #2EB1CB, #5682C2)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              color: 'transparent',
-              lineHeight: 'normal',
-              paddingBottom: '0.25em',
-              overflow: 'visible'
-            }}
-          >
-            Why Choose CodeVerge
-          </h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+          <h2 className="text-heading-1 gradient-text-primary mb-6 leading-snug">
+  Why Choose CodeVerge
+</h2>
+          <p className="text-body-large text-muted max-w-3xl mx-auto">
             We deliver exceptional results through innovation, expertise, and unwavering commitment to our clients' success.
           </p>
         </motion.div>

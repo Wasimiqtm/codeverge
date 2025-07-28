@@ -97,28 +97,19 @@ export default function HeroSlider() {
         <div className="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left">
           <div className="max-w-4xl mx-auto w-full">
             <motion.h1
-              className="mt-12 text-4xl md:text-6xl font-bold mb-6 leading-tight"
+              className="mt-12 text-display-2 mb-6"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              <span
-                style={{
-                  background: 'linear-gradient(90deg, #2EB1CB, #5682C2)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                  color: 'transparent',
-                  display: 'inline-block'
-                }}
-              >
+              <span className="gradient-text-primary drop-shadow-lg">
                 Innovative Software
               </span>
               <br />
-              <span className="text-white drop-shadow-lg">Solutions for Tomorrow</span>
+              <span className="text-primary drop-shadow-lg">Solutions for Tomorrow</span>
             </motion.h1>
             <motion.p
-              className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto leading-relaxed drop-shadow-lg"
+              className="text-body-large text-secondary mb-8 max-w-3xl mx-auto drop-shadow-lg"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}

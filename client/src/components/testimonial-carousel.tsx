@@ -46,23 +46,13 @@ export default function TestimonialCarousel() {
   };
 
   return (
-    <section id="clients" className="py-20 bg-gradient-to-b from-slate-800 to-slate-900">
+    <section id="clients" className="py-16 bg-gradient-to-b from-slate-800 to-slate-900">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2
-            className="text-4xl md:text-5xl font-extrabold mb-6"
-            style={{
-              background: 'linear-gradient(90deg, #2EB1CB, #5682C2, #9FA2AB)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              color: 'transparent',
-              display: 'inline-block',
-            }}
-          >
+        <div className="text-center mb-12">
+          <h2 className="text-heading-1 gradient-text-primary mb-4">
             Our Clients
           </h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+          <p className="text-body-medium text-muted max-w-2xl mx-auto">
             Don't just take our word for it. Here's what our satisfied clients have to say about their experience working with CodeVerge.
           </p>
         </div>
@@ -70,21 +60,23 @@ export default function TestimonialCarousel() {
           {/* Custom navigation arrows */}
           <button
             onClick={handlePrev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-[#10151A] border border-[#2EB1CB] text-[#2EB1CB] p-3 rounded-full shadow-md hover:bg-[#18222C] hover:text-white transition-all duration-300"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-gradient-to-r from-[#2EB1CB] to-[#5682C2] text-white p-4 rounded-full shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300"
             aria-label="Previous Slide"
-            style={{ left: '-2.5rem' }}
+            style={{ left: '-3rem' }}
           >
-            {/* Left Arrow Icon */}
-            <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-left"><path d="M15 18l-6-6 6-6" /></svg>
+            <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
           </button>
           <button
             onClick={handleNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-[#10151A] border border-[#5682C2] text-[#5682C2] p-3 rounded-full shadow-md hover:bg-[#18222C] hover:text-white transition-all duration-300"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-gradient-to-r from-[#5682C2] to-[#2EB1CB] text-white p-4 rounded-full shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300"
             aria-label="Next Slide"
-            style={{ right: '-2.5rem' }}
+            style={{ right: '-3rem' }}
           >
-            {/* Right Arrow Icon */}
-            <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-right"><path d="M9 18l6-6-6-6" /></svg>
+            <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 18l6-6-6-6" />
+            </svg>
           </button>
           <Swiper
             ref={swiperRef}
@@ -96,28 +88,41 @@ export default function TestimonialCarousel() {
           >
             {testimonials.map((testimonial, idx) => (
               <SwiperSlide key={idx}>
-                <div className="gradient-bg-dark rounded-2xl p-8 mx-4 flex flex-col items-center">
-                  <div className="flex items-center mb-2 px-4 md:px-8 py-4 w-full">
-                    <img
-                      src={testimonial.image}
-                      alt={testimonial.name}
-                      className="w-16 h-16 rounded-full object-cover border-4 border-[#2EB1CB] shadow-lg mr-4"
-                    />
-                    <div className="flex flex-col items-start">
-                      <h4 className="text-xl font-semibold text-white">
-                        {testimonial.name}
-                      </h4>
-                      <div className="flex text-blue-400 mb-1 mt-1">
+                <div className="gradient-bg-dark rounded-xl p-8 mx-4 flex flex-col items-center relative overflow-hidden">
+                  {/* Background gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#2EB1CB]/5 to-[#5682C2]/5 rounded-xl" />
+                  
+                  {/* Client info - centered */}
+                  <div className="flex flex-col items-center mb-6 relative z-10">
+                    <div className="relative mb-4">
+                      <img
+                        src={testimonial.image}
+                        alt={testimonial.name}
+                        className="w-20 h-20 rounded-full object-cover border-3 border-[#2EB1CB] shadow-xl"
+                      />
+                      <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-gradient-to-r from-[#2EB1CB] to-[#5682C2] rounded-full flex items-center justify-center">
+                        <Star className="w-3 h-3 text-white fill-current" />
+                      </div>
+                    </div>
+                    <h4 className="text-heading-4 text-primary text-center mb-2">
+                      {testimonial.name}
+                    </h4>
+                                          <div className="flex mb-2">
                         {[...Array(testimonial.rating)].map((_, i) => (
-                          <Star key={i} className="w-5 h-5 fill-current" />
+                          <Star key={i} className="w-4 h-4 fill-[#2EB1CB] text-[#2EB1CB]" />
                         ))}
                       </div>
-                      <p className="text-gray-400">{testimonial.position}</p>
-                    </div>
+                    <p className="text-caption text-muted text-center">{testimonial.position}</p>
                   </div>
-                  <p className="text-lg text-gray-300 italic px-4 md:px-8 py-4 text-center">
-                    "{testimonial.content}"
-                  </p>
+                  
+                  {/* Quote content */}
+                  <div className="relative z-10">
+                    <div className="text-4xl text-[#2EB1CB]/20 absolute -top-2 -left-2">"</div>
+                    <p className="text-body-medium text-secondary italic text-center leading-relaxed px-4">
+                      {testimonial.content}
+                    </p>
+                    <div className="text-4xl text-[#2EB1CB]/20 absolute -bottom-2 -right-2">"</div>
+                  </div>
                 </div>
               </SwiperSlide>
             ))}

@@ -70,20 +70,10 @@ export default function ContactForm() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2
-            className="text-4xl md:text-5xl font-extrabold mb-6"
-            style={{
-              background: 'linear-gradient(90deg, #9FA2AB, #fff)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              color: 'transparent',
-              display: 'inline-block',
-            }}
-          >
+          <h2 className="text-heading-1 gradient-text-primary mb-6">
             Get In Touch
           </h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+          <p className="text-body-large text-muted max-w-3xl mx-auto">
             Ready to transform your business? Let's discuss how our innovative solutions can drive your success.
           </p>
         </motion.div>
@@ -98,7 +88,7 @@ export default function ContactForm() {
             viewport={{ once: true }}
           >
             <div className="gradient-bg-dark rounded-2xl p-8">
-              <h3 className="text-2xl font-bold mb-6 gradient-text">Let's Start a Conversation</h3>
+              <h3 className="text-heading-3 gradient-text-primary mb-6">Let's Start a Conversation</h3>
               <div className="space-y-6">
                 <motion.div 
                   className="flex items-center"

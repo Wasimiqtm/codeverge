@@ -5,6 +5,7 @@ import { Menu, X } from "lucide-react";
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,6 +21,7 @@ export default function Header() {
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
+    setActiveSection(sectionId);
     setIsMenuOpen(false);
   };
 
@@ -40,13 +42,15 @@ export default function Header() {
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
-            <div className="w-24 h-12 rounded-lg flex items-center justify-center overflow-hidden">
-              <img 
-                src="/attached_assets/codeverge.png" 
-                alt="CodeVerge Logo" 
-                className="w-18 h-10 object-contain"
-              />
-            </div>
+            <a href="#home" className="cursor-pointer">
+              <div className="w-24 h-12 rounded-lg flex items-center justify-center overflow-hidden">
+                <img 
+                  src="/attached_assets/codeverge.png" 
+                  alt="CodeVerge Logo" 
+                  className="w-18 h-10 object-contain"
+                />
+              </div>
+            </a>
             {/* <span
               className="text-2xl font-bold"
               style={{
@@ -62,36 +66,30 @@ export default function Header() {
             </span> */}
           </motion.div>
           
-          <div className="hidden md:flex space-x-5">
+          <div className="hidden md:flex space-x-6">
             {[
               { label: "Home", id: "home" },
-              { label: "Stats", id: "about" },
+              { label: "About", id: "about" },
+              { label: "Services", id: "services" },
               { label: "Case Studies", id: "case-studies" },
               { label: "How We Work", id: "how-we-work" },
-              { label: "Fintech", id: "fintech" },
-              { label: "Services", id: "services" },
-              { label: "FAQ", id: "faq" },
-              { label: "Clients", id: "clients" },
               { label: "Contact", id: "contact" },
             ].map((item) => (
               <motion.button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="transition-colors duration-300 font-bold text-lg px-2"
-                style={{
-                  background: 'linear-gradient(90deg, #9FA2AB, #fff)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                  color: 'transparent',
-                  textShadow: '0 2px 8px #232B36',
-                }}
-                whileHover={{ scale: 1.1 }}
+                className={`relative px-4 py-2 text-label transition-all duration-300 group ${
+                  activeSection === item.id 
+                    ? "text-cyan-400" 
+                    : "text-gray-300 hover:text-cyan-400"
+                }`}
+                whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                onMouseEnter={e => (e.currentTarget.style as any).webkitTextFillColor = '#60a5fa'}
-                onMouseLeave={e => (e.currentTarget.style as any).webkitTextFillColor = 'transparent'}
               >
                 {item.label}
+                <span className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 transition-all duration-300 ${
+                  activeSection === item.id ? "w-full" : "w-0 group-hover:w-full"
+                }`}></span>
               </motion.button>
             ))}
           </div>
@@ -123,28 +121,21 @@ export default function Header() {
           <div className="flex flex-col space-y-4 mt-4">
             {[
               { label: "Home", id: "home" },
-              { label: "Stats", id: "about" },
-              { label: "Fintech", id: "fintech" },
+              { label: "About", id: "about" },
               { label: "Services", id: "services" },
-              { label: "FAQ", id: "faq" },
-              { label: "Clients", id: "clients" },
+              { label: "Case Studies", id: "case-studies" },
+              { label: "How We Work", id: "how-we-work" },
               { label: "Contact", id: "contact" }
             ].map((item) => (
               <motion.button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="transition-colors duration-300 font-bold text-lg text-left px-2"
-                style={{
-                  background: 'linear-gradient(90deg, #9FA2AB, #fff)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                  color: 'transparent',
-                  textShadow: '0 2px 8px #232B36',
-                }}
+                className={`text-left px-4 py-3 text-body-medium rounded-lg transition-all duration-300 ${
+                  activeSection === item.id 
+                    ? "text-cyan-400 bg-white/10" 
+                    : "text-gray-300 hover:text-cyan-400 hover:bg-white/5"
+                }`}
                 whileHover={{ x: 10 }}
-                onMouseEnter={e => (e.currentTarget.style as any).webkitTextFillColor = '#60a5fa'}
-                onMouseLeave={e => (e.currentTarget.style as any).webkitTextFillColor = 'transparent'}
               >
                 {item.label}
               </motion.button>

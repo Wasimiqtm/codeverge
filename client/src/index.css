@@ -79,6 +79,117 @@
   }
 }
 
+@layer components {
+  /* Typography System */
+  .text-display-1 {
+    @apply text-5xl md:text-7xl font-bold leading-tight tracking-tight;
+  }
+  
+  .text-display-2 {
+    @apply text-4xl md:text-6xl font-bold leading-tight tracking-tight;
+  }
+  
+  .text-heading-1 {
+    @apply text-3xl md:text-5xl font-bold leading-tight;
+  }
+  
+  .text-heading-2 {
+    @apply text-2xl md:text-4xl font-semibold leading-tight;
+  }
+  
+  .text-heading-3 {
+    @apply text-xl md:text-3xl font-semibold leading-tight;
+  }
+  
+  .text-heading-4 {
+    @apply text-lg md:text-2xl font-semibold leading-tight;
+  }
+  
+  .text-body-large {
+    @apply text-lg md:text-xl font-normal leading-relaxed;
+  }
+  
+  .text-body-medium {
+    @apply text-base md:text-lg font-normal leading-relaxed;
+  }
+  
+  .text-body-small {
+    @apply text-sm md:text-base font-normal leading-relaxed;
+  }
+  
+  .text-caption {
+    @apply text-xs md:text-sm font-medium leading-relaxed;
+  }
+  
+  .text-label {
+    @apply text-sm font-medium leading-tight;
+  }
+
+  /* Gradient Text System */
+  .gradient-text-primary {
+    background: linear-gradient(135deg, #2EB1CB, #5682C2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .gradient-text-secondary {
+    background: linear-gradient(135deg, #5682C2, #9FA2AB);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .gradient-text-accent {
+    background: linear-gradient(135deg, #2EB1CB, #9FA2AB);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .gradient-text-cyan {
+    background: linear-gradient(90deg, #00D4FF, #0099CC);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .gradient-text-purple {
+    background: linear-gradient(90deg, #8B5CF6, #6366F1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .gradient-text-emerald {
+    background: linear-gradient(90deg, #10B981, #059669);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Color System */
+  .text-primary {
+    @apply text-white;
+  }
+  
+  .text-secondary {
+    @apply text-gray-300;
+  }
+  
+  .text-muted {
+    @apply text-gray-400;
+  }
+  
+  .text-accent {
+    @apply text-blue-400;
+  }
+  
+  .text-accent-light {
+    @apply text-cyan-400;
+  }
+}
+
 @layer utilities {
   .gradient-text {
     background: linear-gradient(135deg, hsl(var(--light-blue)), hsl(var(--primary-blue)), hsl(var(--dark-blue)));
@@ -107,6 +218,26 @@
   .service-card-hover:hover {
     transform: translateY(-10px) scale(1.02);
     box-shadow: 0 25px 50px -12px hsla(var(--primary-blue), 0.25);
+  }
+
+  /* Custom Swiper Pagination Styles */
+  .swiper-pagination-bullet {
+    background: #5682C2 !important;
+    opacity: 0.4 !important;
+    width: 12px !important;
+    height: 12px !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .swiper-pagination-bullet-active {
+    background: linear-gradient(135deg, #2EB1CB, #5682C2) !important;
+    opacity: 1 !important;
+    transform: scale(1.2) !important;
+    box-shadow: 0 0 10px rgba(46, 177, 203, 0.5) !important;
+  }
+
+  .swiper-pagination {
+    bottom: 0 !important;
   }
 }
 

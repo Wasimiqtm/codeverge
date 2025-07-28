@@ -51,20 +51,10 @@ export default function FaqSection() {
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.8, delay: 0.2 }}
       >
-        <h2
-          className="text-4xl md:text-5xl font-extrabold mb-6 text-center"
-          style={{
-            background: 'linear-gradient(90deg, #2EB1CB, #5682C2, #9FA2AB)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-            color: 'transparent',
-            display: 'inline-block',
-          }}
-        >
+        <h2 className="text-heading-1 gradient-text-primary mb-6 text-center">
           Frequently Asked Questions
         </h2>
-        <p className="text-xl text-[#B0C4D8] mb-10 text-center">
+        <p className="text-body-large text-secondary mb-10 text-center">
           Answers to the most common questions about our services, process, and expertise.
         </p>
         {/* Simple glass card with rounded border and shadow */}

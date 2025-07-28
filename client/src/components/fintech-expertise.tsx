@@ -20,7 +20,7 @@ export default function FintechExpertise() {
   }, []);
 
   return (
-    <section id="fintech" className="py-20 bg-gradient-to-b from-[#10151A] via-[#18222C] to-[#232B36]">
+    <section id="fintech" className="py-16 bg-gradient-to-b from-[#10151A] via-[#18222C] to-[#232B36]">
       <motion.div
         className="container mx-auto px-6 flex flex-col md:flex-row items-center gap-12"
         initial={{ opacity: 0, y: 50 }}
@@ -48,19 +48,9 @@ export default function FintechExpertise() {
         </div>
         {/* Content */}
         <div className="flex-1">
-          <h2
-            className="text-4xl md:text-5xl font-extrabold mb-6"
-            style={{
-              background: 'linear-gradient(90deg, #2EB1CB, #5682C2, #9FA2AB)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              color: 'transparent',
-              display: 'inline-block',
-            }}
-          >
-            Fintech Expertise
-          </h2>
+        <h2 className="text-heading-1 gradient-text-primary mb-6 leading-snug">
+  Fintech Expertise
+</h2>
           <p className="text-xl text-[#B0C4D8] mb-6 max-w-xl">
             Empowering financial innovation with secure, scalable, and intelligent solutions. We blend technology and compliance to deliver seamless digital finance experiences.
           </p>
