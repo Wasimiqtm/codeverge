@@ -5,20 +5,20 @@ import Lottie from "lottie-react";
 
 const slides = [
   {
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080",
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=800&q=70",
     alt: "Professional IT technology workspace with coding setup"
   },
   {
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080",
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=800&q=70",
     alt: "Modern data center with server racks and blue lighting"
   },
   {
-    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080",
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=800&q=70",
     alt: "Futuristic digital technology interface with glowing elements"
   }
 ];
 
-// Sample Lottie animation (theme-friendly tech/human)
+// Optimized Lottie animation URL
 const lottieUrl = "https://assets2.lottiefiles.com/packages/lf20_2glqweqs.json";
 
 export default function HeroSlider() {
@@ -33,9 +33,19 @@ export default function HeroSlider() {
   }, []);
 
   useEffect(() => {
-    fetch(lottieUrl)
-      .then((res) => res.json())
-      .then((data) => setLottieData(data));
+    const loadLottie = async () => {
+      try {
+        const response = await fetch(lottieUrl);
+        const data = await response.json();
+        setLottieData(data);
+      } catch (error) {
+        console.log('Lottie animation failed to load');
+      }
+    };
+    
+    // Delay loading to prioritize critical content
+    const timer = setTimeout(loadLottie, 1000);
+    return () => clearTimeout(timer);
   }, []);
 
   const goToPrev = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
